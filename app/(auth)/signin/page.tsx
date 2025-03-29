@@ -4,7 +4,6 @@ import {
     Card,
     CardContent,
     CardDescription,
-    CardFooter,
     CardHeader,
     CardTitle,
 } from "@/components/ui/card";
@@ -94,7 +93,7 @@ export default function Page(){
                             )}
                         />
                         <Button type="submit" className="w-full mt-6">Sign In</Button>
-                        <p className="text-center text-sm my-3">or</p>
+                        <p className="text-center text-sm my-3 text-muted-foreground">or</p>
                         <Button variant="outline" type="button" className="w-full">
                             <KeyRound/>
                             <p className="font-normal">Continue with <span className="font-bold">Passkey</span></p>
