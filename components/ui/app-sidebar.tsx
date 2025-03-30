@@ -46,7 +46,7 @@ export function AppSidebar() {
       <SidebarHeader>
         <SidebarMenu>
           <SidebarMenuItem className="flex m-2">
-            <div className="bg-primary aspect-square w-10 h-10 rounded-lg flex justify-center items-center"><Banknote/></div>
+            <div className="bg-primary text-primary-foreground aspect-square w-10 h-10 rounded-lg flex justify-center items-center"><Banknote/></div>
             <div className="flex flex-col justify-center ml-3">
               <p className="font-bold">Xpens</p>
               <p className="text-xs text-muted-foreground">Finance App</p>
@@ -104,7 +104,7 @@ export function AppSidebar() {
         </SidebarGroup>
       </SidebarContent>
       <SidebarFooter>
-        <Card className="bg-primary flex flex-row gap-4 items-center py-2 px-3 mb-2 rounded-md">
+        <Card className="bg-primary text-primary-foreground flex flex-row gap-4 items-center py-2 px-3 mb-2 rounded-md">
           <TrendingUp size={50}/>
           <div className="flex flex-col w-full">
             <p className="font-medium">USD/IDR</p>

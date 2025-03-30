@@ -48,7 +48,7 @@ export default function Page(){
 
     return <div className="h-screen w-screen flex items-center justify-center">
         <ThemeButton className="absolute top-4 right-4" />
-        <Card className="w-80">
+        <Card className="w-80 bg-card">
             <CardHeader>
                 <CardTitle><h1 className="text-2xl">Sign In</h1></CardTitle>
                 <CardDescription>Sign in to your account.</CardDescription>
