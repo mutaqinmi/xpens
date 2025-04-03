@@ -2,9 +2,68 @@ import { ExchangeRatesChart } from "@/components/charts/exchange-rates";
 import { Expenses } from "@/components/charts/expenses";
 import Balance from "@/components/ui/balance";
 import { Card } from "@/components/ui/card";
-import { Banknote, BanknoteArrowDown, TrendingUp, WalletCards } from "lucide-react";
+import { Banknote, BanknoteArrowDown, FileDown, TrendingUp, WalletCards } from "lucide-react";
+import { Button } from "../ui/button";
+import { AccountUsage } from "../charts/account-usage";
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "../ui/table";
+import { formatCurrency } from "@/lib/currency-formatter";
+import { useGlobalCurrencies } from "@/hooks/use-global-currencies";
+import { GlobalCurrenciesState } from "@/types/global-currencies";
+import { Badge } from "../ui/badge";
+import {
+    Pagination,
+    PaginationContent,
+    PaginationEllipsis,
+    PaginationItem,
+    PaginationLink,
+    PaginationNext,
+    PaginationPrevious,
+  } from "../ui/pagination"
+  
+
+const recentTransaction = [
+    {
+        date: "April 3rd, 2025",
+        detail: "Transportation",
+        status: true,
+        account: "GoPay",
+        amount: 12000
+    },
+    {
+        date: "April 3rd, 2025",
+        detail: "Transportation",
+        status: true,
+        account: "GoPay",
+        amount: 12000
+    },
+    {
+        date: "April 3rd, 2025",
+        detail: "Transportation",
+        status: false,
+        account: "GoPay",
+        amount: 12000
+    },
+    {
+        date: "April 3rd, 2025",
+        detail: "Transportation",
+        status: true,
+        account: "GoPay",
+        amount: 12000
+    },
+    {
+        date: "April 3rd, 2025",
+        detail: "Transportation",
+        status: true,
+        account: "GoPay",
+        amount: 12000
+    },
+]
 
 export default function Overview(props: {range: string}){
+    const globalCurrencies = useGlobalCurrencies((state: GlobalCurrenciesState) => state.globalCurrencies);
+    const globalCurrency = useGlobalCurrencies((state: GlobalCurrenciesState) => state.globalCurrency);
+    const getLocale = (globalCurrency: string) => globalCurrencies.find((currency) => currency.value === globalCurrency)!.locale
+
     return <>
         <div className="w-full grid gap-4 grid-cols-1 md:grid-cols-3">
             <div className="w-full col-span-2">
@@ -53,6 +112,53 @@ export default function Overview(props: {range: string}){
                     </div>
                     <Expenses/>
                 </Card>
+                <Card className="mt-4 px-3 py-3">
+                    <div>
+                        <h2 className="text-lg font-semibold">Recent Transaction</h2>
+                        <p className="text-xs text-muted-foreground">Shows your transaction history based on the specified time.</p>    
+                    </div>
+                    <Table>
+                        <TableHeader>
+                            <TableRow>
+                                <TableHead>Date</TableHead>
+                                <TableHead>Detail</TableHead>
+                                <TableHead>Status</TableHead>
+                                <TableHead>Account</TableHead>
+                                <TableHead className="text-right">Amount</TableHead>
+                            </TableRow>
+                        </TableHeader>
+                        <TableBody>
+                            {recentTransaction.map((item, index) => {
+                                return <TableRow key={index}>
+                                    <TableCell>{item.date}</TableCell>
+                                    <TableCell>{item.detail}</TableCell>
+                                    <TableCell>{item.status ? <Badge>Paid</Badge> : <Badge variant={"destructive"}>Unpaid</Badge>}</TableCell>
+                                    <TableCell>{item.account}</TableCell>
+                                    <TableCell className="text-right">{formatCurrency(item.amount, globalCurrency, getLocale(globalCurrency))}</TableCell>
+                                </TableRow>
+                            })}
+                        </TableBody>
+                    </Table>
+                    <Pagination>
+                        <PaginationContent>
+                            <PaginationItem>
+                                <PaginationPrevious href="#" />
+                            </PaginationItem>
+                            <PaginationItem>
+                                <PaginationLink href="#">1</PaginationLink>
+                            </PaginationItem>
+                            <PaginationItem>
+                                <PaginationLink href="#">2</PaginationLink>
+                            </PaginationItem>
+                            <PaginationItem>
+                                <PaginationEllipsis />
+                            </PaginationItem>
+                            <PaginationItem>
+                                <PaginationNext href="#" />
+                            </PaginationItem>
+                        </PaginationContent>
+                    </Pagination>
+                </Card>
             </div>
             <div className="w-full col-span-1">
                 <Card className="px-3 py-3">
@@ -79,16 +185,25 @@ export default function Overview(props: {range: string}){
                         <p className="text-xs text-muted-foreground">Shows a list of transactions that you have not paid for.</p>    
                     </div>
                 </Card>
+                <Card className="mt-4 px-3 py-3">
+                    <div>
+                        <h2 className="text-lg font-semibold">Accounts</h2>
+                        <p className="text-xs text-muted-foreground">Displays frequently used accounts.</p>    
+                    </div>
+                    <AccountUsage/>
+                </Card>
+                <Card className="mt-4 px-3 py-3">
+                    <div>
+                        <h2 className="text-lg font-semibold">E-Statement</h2>
+                        <p className="text-xs text-muted-foreground">Download your financial statements for the last month.</p>    
+                    </div>
+                    <Button>
+                        <FileDown/>
+                        <span>Download</span>
+                    </Button>
+                </Card>
             </div>
         </div>
-        <div className="w-full grid gap-4 grid-cols-1 md:grid-cols-3 mt-4">
-            <div className="w-full col-span-1">
-                <Card></Card>
-                <Card className="mt-4"></Card>
-            </div>
-            <div className="w-full col-span-2">
-                <Card></Card>
-            </div>
-        </div>
+        
     </>
 }
