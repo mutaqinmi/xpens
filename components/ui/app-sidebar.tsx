@@ -23,17 +23,17 @@ import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel,
 const menu = [
   {
     title: "Overview",
-    url: "#",
+    url: "/",
     icon: ChartPie,
   },
   {
     title: "Finances",
-    url: "#",
+    url: "/finances",
     icon: HandCoins,
   },
   {
     title: "Wallets",
-    url: "#",
+    url: "/wallets",
     icon: Wallet,
   },
 ]
@@ -78,7 +78,7 @@ export function AppSidebar() {
             <SidebarMenu>
               <SidebarMenuItem>
                 <SidebarMenuButton asChild>
-                  <a href="#">
+                  <a href="/manage-finances">
                     <Banknote/>
                     <span>Income & Outcome</span>
                   </a>
@@ -93,7 +93,7 @@ export function AppSidebar() {
             <SidebarMenu>
               <SidebarMenuItem>
                 <SidebarMenuButton asChild>
-                  <a href="#">
+                  <a href="/report">
                     <FileClock/>
                     <span>E - Statement</span>
                   </a>
