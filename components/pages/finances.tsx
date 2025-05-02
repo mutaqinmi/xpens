@@ -16,7 +16,8 @@ import { formatCurrency } from "@/lib/currency-formatter";
 import { useGlobalCurrencies } from "@/hooks/use-global-currencies";
 import { GlobalCurrenciesState } from "@/types/global-currencies";
 import { Button } from "../ui/button";
-import { FileDown } from "lucide-react";
+import { FileDown, MoreVerticalIcon } from "lucide-react";
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "../ui/dropdown-menu";
 
 const recentTransaction = [
     {
@@ -227,6 +228,16 @@ export default function Finances(props: {range: string}) {
                                     <TableCell>{item.status ? <Badge>Paid</Badge> : <Badge variant={"destructive"}>Unpaid</Badge>}</TableCell>
                                     <TableCell>{item.account}</TableCell>
                                     <TableCell className="text-right">{formatCurrency(item.amount, globalCurrency, getLocale(globalCurrency))}</TableCell>
+                                    <TableCell>
+                                        <DropdownMenu>
+                                            <DropdownMenuTrigger asChild>
+                                                <Button variant={"ghost"}><MoreVerticalIcon/></Button>
+                                            </DropdownMenuTrigger>
+                                            <DropdownMenuContent>
+                                                <DropdownMenuItem>Mark as {item.status ? "unpaid" : "paid"}</DropdownMenuItem>
+                                            </DropdownMenuContent>
+                                        </DropdownMenu>
+                                    </TableCell>
                                 </TableRow>
                             })}
                         </TableBody>

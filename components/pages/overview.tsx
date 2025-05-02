@@ -2,7 +2,7 @@ import { ExchangeRatesChart } from "@/components/charts/exchange-rates";
 import { Expenses } from "@/components/charts/expenses";
 import Balance from "@/components/ui/balance";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
-import { Banknote, BanknoteArrowDown, FileDown, TrendingUp, WalletCards } from "lucide-react";
+import { Banknote, BanknoteArrowDown, FileDown, MoreVerticalIcon, TrendingUp, WalletCards } from "lucide-react";
 import { Button } from "../ui/button";
 import { AccountUsage } from "../charts/account-usage";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "../ui/table";
@@ -18,8 +18,8 @@ import {
     PaginationLink,
     PaginationNext,
     PaginationPrevious,
-  } from "../ui/pagination"
-  
+} from "../ui/pagination"
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "../ui/dropdown-menu";
 
 const recentTransaction = [
     {
@@ -138,6 +138,16 @@ export default function Overview(props: {range: string}){
                                         <TableCell>{item.status ? <Badge>Paid</Badge> : <Badge variant={"destructive"}>Unpaid</Badge>}</TableCell>
                                         <TableCell>{item.account}</TableCell>
                                         <TableCell className="text-right">{formatCurrency(item.amount, globalCurrency, getLocale(globalCurrency))}</TableCell>
+                                        <TableCell>
+                                            <DropdownMenu>
+                                                <DropdownMenuTrigger asChild>
+                                                    <Button variant={"ghost"}><MoreVerticalIcon/></Button>
+                                                </DropdownMenuTrigger>
+                                                <DropdownMenuContent>
+                                                    <DropdownMenuItem>Mark as {item.status ? "unpaid" : "paid"}</DropdownMenuItem>
+                                                </DropdownMenuContent>
+                                            </DropdownMenu>
+                                        </TableCell>
                                     </TableRow>
                                 })}
                             </TableBody>
@@ -173,7 +183,7 @@ export default function Overview(props: {range: string}){
                         <CardDescription>Display exchange rate data by currency.</CardDescription>
                     </CardHeader>
                     <CardContent>
-                        <div className="flex flex-row gap-4 items-center mb-2">
+                        <div className="flex flex-row gap-4 items-center mb-4">
                             <TrendingUp size={50}/>
                             <div className="flex flex-col w-full">
                                 <p className="font-medium">USD/IDR</p>

@@ -10,6 +10,29 @@ import { DropdownMenuLabel } from "@radix-ui/react-dropdown-menu";
 import { MoreVerticalIcon, PlusCircle } from "lucide-react";
 
 export default function Page() {
+    const wallets = [
+        {
+            number: "081234567899",
+            account: "Bank Jago",
+            balance: 1289300,
+        },
+        {
+            number: "081234567899",
+            account: "GoPay",
+            balance: 1289300,
+        },
+        {
+            number: "081234567899",
+            account: "PayPal",
+            balance: 1289300,
+        },
+        {
+            number: "081234567899",
+            account: "BCA",
+            balance: 1289300,
+        },
+    ]
+    
     return <div className="w-full">
         <TopBar/>
         <header className="my-8">
@@ -29,130 +52,39 @@ export default function Page() {
                         </CardContent>
                     </Card>
                     <div className="w-full grid grid-cols-3 gap-4 mt-4">
-                        <Card className="p-0 cursor-pointer">
-                            <CardContent className="flex flex-col p-3 gap-6">
-                                <div className="flex items-start justify-between">
-                                    <div className="flex flex-col gap-2 items-start justify-start">
-                                        <span className="text-xs leading-none text-muted-foreground">081234567899</span>
-                                        <span className="font-semibold leading-none">Bank Jago</span>
+                        {wallets.map((wallet, index) => {
+                            return <Card key={index} className="p-0 cursor-pointer">
+                                <CardContent className="flex flex-col p-3 gap-6">
+                                    <div className="flex items-start justify-between">
+                                        <div className="flex flex-col gap-2 items-start justify-start">
+                                            <span className="text-xs leading-none text-muted-foreground">{wallet.number}</span>
+                                            <span className="font-semibold leading-none">{wallet.account}</span>
+                                        </div>
+                                        <DropdownMenu>
+                                            <DropdownMenuTrigger asChild>
+                                                <Button size={null} variant={"ghost"}><MoreVerticalIcon size={20}/></Button>
+                                            </DropdownMenuTrigger>
+                                            <DropdownMenuContent>
+                                                <DropdownMenuLabel>
+                                                    <span className="p-2 font-semibold">{wallet.account}</span>
+                                                </DropdownMenuLabel>
+                                                <DropdownMenuSeparator/> 
+                                                <DropdownMenuItem>Top up</DropdownMenuItem>
+                                                <DropdownMenuItem>Out</DropdownMenuItem>
+                                                <DropdownMenuItem>Move/Transfer</DropdownMenuItem>
+                                                <DropdownMenuSeparator/>
+                                                <DropdownMenuItem>Edit Wallet</DropdownMenuItem>
+                                                <DropdownMenuItem><span className="text-red-500">Delete Wallet</span></DropdownMenuItem>
+                                            </DropdownMenuContent>
+                                        </DropdownMenu>
                                     </div>
-                                    <DropdownMenu>
-                                        <DropdownMenuTrigger asChild>
-                                            <Button size={null} variant={"ghost"}><MoreVerticalIcon size={20}/></Button>
-                                        </DropdownMenuTrigger>
-                                        <DropdownMenuContent>
-                                            <DropdownMenuLabel>
-                                                <span className="p-2 font-semibold">Bank Jago</span>
-                                            </DropdownMenuLabel>
-                                            <DropdownMenuSeparator/> 
-                                            <DropdownMenuItem>Top up</DropdownMenuItem>
-                                            <DropdownMenuItem>Out</DropdownMenuItem>
-                                            <DropdownMenuItem>Move/Transfer</DropdownMenuItem>
-                                            <DropdownMenuSeparator/>
-                                            <DropdownMenuItem>Edit Wallet</DropdownMenuItem>
-                                            <DropdownMenuItem><span className="text-red-500">Delete Wallet</span></DropdownMenuItem>
-                                        </DropdownMenuContent>
-                                    </DropdownMenu>
-                                </div>
-                                <div className="flex flex-col gap-2 mt-2">
-                                    <p className="text-xs text-muted-foreground leading-0">Balance</p>
-                                    <Balance className="text-2xl font-semibold">1289300</Balance>
-                                </div>
-                            </CardContent>
-                        </Card>
-                        <Card className="p-0 cursor-pointer">
-                            <CardContent className="flex flex-col p-3 gap-6">
-                                <div className="flex items-start justify-between">
-                                    <div className="flex flex-col gap-2 items-start justify-start">
-                                        <span className="text-xs leading-none text-muted-foreground">081234567899</span>
-                                        <span className="font-semibold leading-none">GoPay</span>
+                                    <div className="flex flex-col gap-2 mt-2">
+                                        <p className="text-xs text-muted-foreground leading-0">Balance</p>
+                                        <Balance className="text-2xl font-semibold">{wallet.balance.toString()}</Balance>
                                     </div>
-                                    <DropdownMenu>
-                                        <DropdownMenuTrigger asChild>
-                                            <Button size={null} variant={"ghost"}><MoreVerticalIcon size={20}/></Button>
-                                        </DropdownMenuTrigger>
-                                        <DropdownMenuContent>
-                                            <DropdownMenuLabel>
-                                                <span className="p-2 font-semibold">GoPay</span>
-                                            </DropdownMenuLabel>
-                                            <DropdownMenuSeparator/> 
-                                            <DropdownMenuItem>Top up</DropdownMenuItem>
-                                            <DropdownMenuItem>Out</DropdownMenuItem>
-                                            <DropdownMenuItem>Move/Transfer</DropdownMenuItem>
-                                            <DropdownMenuSeparator/>
-                                            <DropdownMenuItem>Edit Wallet</DropdownMenuItem>
-                                            <DropdownMenuItem><span className="text-red-500">Delete Wallet</span></DropdownMenuItem>
-                                        </DropdownMenuContent>
-                                    </DropdownMenu>
-                                </div>
-                                <div className="flex flex-col gap-2 mt-2">
-                                    <p className="text-xs text-muted-foreground leading-0">Balance</p>
-                                    <Balance className="text-2xl font-semibold">1289300</Balance>
-                                </div>
-                            </CardContent>
-                        </Card>
-                        <Card className="p-0 cursor-pointer">
-                            <CardContent className="flex flex-col p-3 gap-6">
-                                <div className="flex items-start justify-between">
-                                    <div className="flex flex-col gap-2 items-start justify-start">
-                                        <span className="text-xs leading-none text-muted-foreground">081234567899</span>
-                                        <span className="font-semibold leading-none">PayPal</span>
-                                    </div>
-                                    <DropdownMenu>
-                                        <DropdownMenuTrigger asChild>
-                                            <Button size={null} variant={"ghost"}><MoreVerticalIcon size={20}/></Button>
-                                        </DropdownMenuTrigger>
-                                        <DropdownMenuContent>
-                                            <DropdownMenuLabel>
-                                                <span className="p-2 font-semibold">PayPal</span>
-                                            </DropdownMenuLabel>
-                                            <DropdownMenuSeparator/> 
-                                            <DropdownMenuItem>Top up</DropdownMenuItem>
-                                            <DropdownMenuItem>Out</DropdownMenuItem>
-                                            <DropdownMenuItem>Move/Transfer</DropdownMenuItem>
-                                            <DropdownMenuSeparator/>
-                                            <DropdownMenuItem>Edit Wallet</DropdownMenuItem>
-                                            <DropdownMenuItem><span className="text-red-500">Delete Wallet</span></DropdownMenuItem>
-                                        </DropdownMenuContent>
-                                    </DropdownMenu>
-                                </div>
-                                <div className="flex flex-col gap-2 mt-2">
-                                    <p className="text-xs text-muted-foreground leading-0">Balance</p>
-                                    <Balance className="text-2xl font-semibold">1289300</Balance>
-                                </div>
-                            </CardContent>
-                        </Card>
-                        <Card className="p-0 cursor-pointer">
-                            <CardContent className="flex flex-col p-3 gap-6">
-                                <div className="flex items-start justify-between">
-                                    <div className="flex flex-col gap-2 items-start justify-start">
-                                        <span className="text-xs leading-none text-muted-foreground">081234567899</span>
-                                        <span className="font-semibold leading-none">BCA</span>
-                                    </div>
-                                    <DropdownMenu>
-                                        <DropdownMenuTrigger asChild>
-                                            <Button size={null} variant={"ghost"}><MoreVerticalIcon size={20}/></Button>
-                                        </DropdownMenuTrigger>
-                                        <DropdownMenuContent>
-                                            <DropdownMenuLabel>
-                                                <span className="p-2 font-semibold">BCA</span>
-                                            </DropdownMenuLabel>
-                                            <DropdownMenuSeparator/> 
-                                            <DropdownMenuItem>Top up</DropdownMenuItem>
-                                            <DropdownMenuItem>Out</DropdownMenuItem>
-                                            <DropdownMenuItem>Move/Transfer</DropdownMenuItem>
-                                            <DropdownMenuSeparator/>
-                                            <DropdownMenuItem>Edit Wallet</DropdownMenuItem>
-                                            <DropdownMenuItem><span className="text-red-500">Delete Wallet</span></DropdownMenuItem>
-                                        </DropdownMenuContent>
-                                    </DropdownMenu>
-                                </div>
-                                <div className="flex flex-col gap-2 mt-2">
-                                    <p className="text-xs text-muted-foreground leading-0">Balance</p>
-                                    <Balance className="text-2xl font-semibold">1289300</Balance>
-                                </div>
-                            </CardContent>
-                        </Card>
+                                </CardContent>
+                            </Card>
+                        })}
                         <Card className="group h-full bg-transparent cursor-pointer border-dashed border-2">
                             <CardContent className="flex flex-col p-3 gap-2 items-center justify-center">
                                 <PlusCircle className="text-muted-foreground group-hover:text-foreground transition-all ease-in-out duration-300"/>
