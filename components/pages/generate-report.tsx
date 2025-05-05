@@ -196,10 +196,10 @@ const recentTransaction = [
     },
 ]
 
-export default function Finances(props: {range: string}) {
+export default function GenerateReport(){
     const globalCurrencies = useGlobalCurrencies((state: GlobalCurrenciesState) => state.globalCurrencies);
     const globalCurrency = useGlobalCurrencies((state: GlobalCurrenciesState) => state.globalCurrency);
-    const getLocale = (globalCurrency: string) => globalCurrencies.find((currency) => currency.value === globalCurrency)!.locale
+    const getLocale = (globalCurrency: string) => globalCurrencies.find((currency) => currency.value === globalCurrency)!.locale;
 
     return <div className="grid grid-cols-3 gap-4">
         <div className="col-span-2">
