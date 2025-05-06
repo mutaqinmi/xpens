@@ -18,6 +18,9 @@ import {
 import { Card } from "./card"
 import { Avatar, AvatarFallback, AvatarImage } from "./avatar"
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from "./dropdown-menu"
+import { useFakeAuth } from "@/hooks/use-fake-auth"
+import { AuthState } from "@/types/fake-auth"
+import { useRouter } from "next/navigation"
 
 // Menu items.
 const menu = [
@@ -39,7 +42,14 @@ const menu = [
 ]
 
 export function AppSidebar() {
+  const router = useRouter();
   const { isMobile } = useSidebar();
+  const setAuthentication = useFakeAuth((state: AuthState) => state.setAuthentication);
+
+  function signOut(){
+    setAuthentication(false);
+    router.push("/signin");
+  }
 
   return (
     <Sidebar>
@@ -155,7 +165,7 @@ export function AppSidebar() {
                   </div>
                 </DropdownMenuLabel>
                 <DropdownMenuSeparator/>
-                <DropdownMenuItem>
+                <DropdownMenuItem onClick={() => signOut()}>
                   <LogOut />
                   Log out
                 </DropdownMenuItem>

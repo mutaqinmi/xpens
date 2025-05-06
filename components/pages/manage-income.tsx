@@ -24,6 +24,7 @@ import {
     CommandList,
 } from "@/components/ui/command"
 import { Checkbox } from "../ui/checkbox";
+import { globalCurrencies, wallets } from "@/sandbox/dummy";
 
 const formSchema = z.object({
     details: z.string().min(1, {
@@ -49,46 +50,6 @@ export default function ManageIncome(){
         },
     })
     const [globalCurrency, setGlobalCurrency] = useState("idr");
-    const globalCurrencies = [
-        {
-            value: "idr",
-            name: "IDR",
-            locale: "id-ID",
-        },
-        {
-            value: "usd",
-            name: "USD",
-            locale: "en-US",
-        },
-        {
-            value: "jpy",
-            name: "JPY",
-            locale: "ja-JP",
-        },
-        {
-            value: "eur",
-            name: "EUR",
-            locale: "de-DE",
-        }
-    ]
-    const wallets = [
-        {
-          value: "jago",
-          label: "Bank Jago",
-        },
-        {
-          value: "gopay",
-          label: "GoPay",
-        },
-        {
-          value: "paypal",
-          label: "PayPal",
-        },
-        {
-          value: "bca",
-          label: "BCA",
-        },
-    ]
 
     function handleTags(e: React.KeyboardEvent<HTMLInputElement>) {
         if (e.key === "Enter") {
@@ -185,7 +146,7 @@ export default function ManageIncome(){
                                 aria-expanded={open}
                                 className="w-full justify-between"
                             >
-                                {value ? wallets.find((wallet) => wallet.value === value)?.label : "Select wallet..."}
+                                {value ? wallets.find((wallet) => wallet.number === value)?.account : "Select wallet..."}
                                 <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
                             </Button>
                         </PopoverTrigger>
@@ -197,15 +158,15 @@ export default function ManageIncome(){
                                     <CommandGroup>
                                     {wallets.map((wallet) => (
                                         <CommandItem
-                                            key={wallet.value}
-                                            value={wallet.value}
+                                            key={wallet.number}
+                                            value={wallet.number}
                                             onSelect={(currentValue) => {
                                                 setValue(currentValue === value ? "" : currentValue)
                                                 setOpen(false)
                                             }}
                                         >
-                                            <Check className={`mr-2 h-4 w-4 ${value === wallet.value ? "opacity-100" : "opacity-0"}`}/>
-                                            {wallet.label}
+                                            <Check className={`mr-2 h-4 w-4 ${value === wallet.number ? "opacity-100" : "opacity-0"}`}/>
+                                            {wallet.account}
                                         </CommandItem>
                                     ))}
                                     </CommandGroup>

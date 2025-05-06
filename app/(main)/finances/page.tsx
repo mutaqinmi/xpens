@@ -1,16 +1,12 @@
 'use client'
 import Finances from "@/components/pages/finances";
+import FakeAuthWrapper from "@/components/ui/fake-auth-wrapper";
+import Header from "@/components/ui/header";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import TopBar from "@/components/ui/top-bar";
 
 export default function Page() {
-    return <div className="w-full">
-        <TopBar/>
-        <header className="my-8">
-            <h1 className="text-2xl font-semibold">Finances</h1>
-            <p className="text-sm text-muted-foreground">Manage your finance activities.</p>
-        </header>
-        <main className="w-full flex flex-col gap-4">
+    return <FakeAuthWrapper>
+        <Header title="Finances" subtitle="Summary of your income and expenses.">
             <Tabs defaultValue="1m">
                 <TabsList className="mb-4">
                     <TabsTrigger className="px-3" value="7d">7 Days</TabsTrigger>
@@ -25,6 +21,6 @@ export default function Page() {
                 <TabsContent value="6m"><Finances range="6m"/></TabsContent>
                 <TabsContent value="1y"><Finances range="1y"/></TabsContent>
             </Tabs>
-        </main>
-    </div>
+        </Header>
+    </FakeAuthWrapper>
 }
